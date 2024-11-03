@@ -6,6 +6,7 @@ const Users: CollectionConfig = {
   admin: {
     defaultColumns: ['name', 'email'],
     useAsTitle: 'name',
+    group: "Global",
   },
   auth: true,
   fields: [
