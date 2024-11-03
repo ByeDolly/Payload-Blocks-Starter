@@ -7,20 +7,7 @@ type LinkType = {
   text: string
   url: string
   newWindow: boolean
-  appearance: 'link' | 'button' | 'button-outline'
-}
-
-const getLinkStyles = (appearance: LinkType['appearance']) => {
-  switch (appearance) {
-    case 'button':
-      return <Button size="lg" className="h-12 px-6" />
-    case 'button-outline':
-      return <Button variant="outline" size="lg" className="h-12 px-6" />
-    case 'link':
-      return <Button variant="link" />
-    default:
-      return <Button size="lg" className="h-12 px-6" />
-  }
+  appearance: string
 }
 
 export const HeroBlock: React.FC<{
@@ -73,10 +60,13 @@ export const HeroBlock: React.FC<{
                     href={heroButton.url}
                     target={heroButton.newWindow ? '_blank' : undefined}
                   >
-                    {React.cloneElement(
-                      getLinkStyles(heroButton.appearance),
-                      { children: heroButton.text }
-                    )}
+                    <Button 
+                      variant={heroButton.appearance === 'button' ? 'default' : heroButton.appearance}
+                      size="lg"
+                      className={heroButton.appearance !== 'link' ? 'h-12 px-6' : undefined}
+                    >
+                      {heroButton.text}
+                    </Button>
                   </Link>
                 ))}
               </div>
