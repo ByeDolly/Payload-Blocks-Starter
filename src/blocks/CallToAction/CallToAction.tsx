@@ -10,37 +10,6 @@ type LinkType = {
     appearance: 'link' | 'default' | 'outline'
 }
 
-const getLinkStyles = (appearance: LinkType['appearance'], theme: 'light' | 'dark') => {
-    switch (appearance) {
-        case 'default':
-            return <Button
-                size="lg"
-                className={cn(
-                    "h-12 px-6",
-                    theme === 'dark' ? 'bg-white text-gray-900 hover:bg-gray-100' : ''
-                )}
-            />
-        case 'outline':
-            return <Button
-                variant="outline"
-                size="lg"
-                className={cn(
-                    "h-12 px-6",
-                    theme === 'dark' ? 'bg-transparent border-white text-white hover:bg-white hover:text-gray-900' : ''
-                )}
-            />
-        case 'link':
-            return <Button
-                variant="link"
-                className={cn(
-                    theme === 'dark' ? 'text-white' : ''
-                )}
-            />
-        default:
-            return <Button size="lg" className="h-12 px-6" />
-    }
-}
-
 export const CallToActionBlock: React.FC<{
     heading?: string
     subheading?: string
@@ -81,10 +50,14 @@ export const CallToActionBlock: React.FC<{
                                     href={ctaButton.url}
                                     target={ctaButton.newWindow ? '_blank' : undefined}
                                 >
-                                    {React.cloneElement(
-                                        getLinkStyles(ctaButton.appearance, theme),
-                                        { children: ctaButton.text }
-                                    )}
+                                    <Button
+                                        variant={ctaButton.appearance}
+                                        size="lg"
+                                        theme={theme}
+                                        className="h-12 px-6"
+                                    >
+                                        {ctaButton.text}
+                                    </Button>
                                 </Link>
                             ))}
                         </div>

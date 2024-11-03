@@ -89,11 +89,8 @@ export const ContentMediaBlock: React.FC<ContentMediaProps> = ({
                       target={button.newWindow ? '_blank' : undefined}
                     >
                       <Button
-                        variant={button.appearance === 'outline' ? 'outline' : 'default'}
-                        className={cn(
-                          isDark && button.appearance === 'outline' && 
-                          'border-white text-white hover:bg-white hover:text-gray-900'
-                        )}
+                        variant={button.appearance}
+                        theme={theme}
                       >
                         {button.text}
                       </Button>
