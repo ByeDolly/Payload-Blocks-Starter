@@ -1471,6 +1471,14 @@
     uuid "10.0.0"
     ws "^8.16.0"
 
+"@payloadcms/plugin-seo@^3.0.0-beta.123":
+  version "3.0.0-beta.123"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-3.0.0-beta.123.tgz#212f3c2898152dc6b7527126e8a905c7f05bf8d1"
+  integrity sha512-ijoquxgoLJ+UBj1Tf/xwFLyKIThXmYVlps9SwA26ZiEx7dCPpo5QNkT8q4iUq5r1mhFVmx3yI4KlSj2WhsCggA==
+  dependencies:
+    "@payloadcms/translations" "3.0.0-beta.123"
+    "@payloadcms/ui" "3.0.0-beta.123"
+
 "@payloadcms/richtext-lexical@^3.0.0-beta.123":
   version "3.0.0-beta.123"
   resolved "https://registry.yarnpkg.com/@payloadcms/richtext-lexical/-/richtext-lexical-3.0.0-beta.123.tgz#315da9e26d7dd9a4dfd22d22328d12830a27b60f"
@@ -2270,6 +2278,11 @@ acorn@^8.9.0:
   version "8.14.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.14.0.tgz#063e2c70cac5fb4f6467f0b11152e04c682795b0"
   integrity sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==
+
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==
 
 ajv@8.17.1:
   version "8.17.1"

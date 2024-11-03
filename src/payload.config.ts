@@ -1,25 +1,31 @@
+import { buildConfig } from "payload";
+
 import sharp from "sharp";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 // import { postgresAdapter } from "@payloadcms/db-postgres";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { buildConfig } from "payload";
+import { seoPlugin } from "@payloadcms/plugin-seo";
+
 import { Pages } from "./collections/Pages";
 import { Media } from "./collections/Media";
 import Users from "./collections/Users";
 
 export default buildConfig({
 	// Define and configure your collections in this array
-	collections: [
-        Pages, 
-        Media, 
-        Users
-    ],
+	collections: [Pages, Media, Users],
+
+	plugins: [
+		seoPlugin({
+			collections: ["pages"],
+			uploadsCollection: "media",
+            tabbedUI: true,
+			generateTitle: ({ doc }) => `Website.com — ${doc.title}`,
+			generateDescription: ({ doc }) => doc.excerpt,
+		}),
+	],
 
 	// If you'd like to use Rich Text, pass your editor here
 	editor: lexicalEditor(),
-
-	// Your Payload secret - should be a complex and secure string, unguessable
-	secret: process.env.PAYLOAD_SECRET || "",
 
 	// Whichever Database Adapter you're using should go here
 	//   db: postgresAdapter({
@@ -64,4 +70,7 @@ export default buildConfig({
 	},
 
 	globals: [],
+
+	// Your Payload secret - should be a complex and secure string, unguessable
+	secret: process.env.PAYLOAD_SECRET || "",
 });
