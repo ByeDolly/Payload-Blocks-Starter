@@ -21,4 +21,7 @@ export const Media: CollectionConfig = {
       type: 'text',
     },
   ],
+  admin: { 
+    group: "Global",
+  },
 }

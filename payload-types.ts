@@ -13,7 +13,6 @@ export interface Config {
   collections: {
     pages: Page;
     media: Media;
-    'reusable-blocks': ReusableBlock;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -22,7 +21,6 @@ export interface Config {
   collectionsSelect?: {
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    'reusable-blocks': ReusableBlocksSelect<false> | ReusableBlocksSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -68,21 +66,7 @@ export interface Page {
   id: string;
   title?: string | null;
   pageBlocks?:
-    | (
-        | AccordionBlock
-        | Hero
-        | SectionIntro
-        | CallToAction
-        | CardGrid
-        | ContentMediaBlock
-        | RichTextBlock
-        | {
-            reusableBlock: string | ReusableBlock;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'ReusableBlocksBlock';
-          }
-      )[]
+    | (AccordionBlock | Hero | SectionIntro | CallToAction | CardGrid | ContentMediaBlock | RichTextBlock)[]
     | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -301,22 +285,11 @@ export interface RichTextBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "reusable-blocks".
- */
-export interface ReusableBlock {
-  id: string;
-  title: string;
-  blocks: (AccordionBlock | Hero | SectionIntro | CallToAction | CardGrid | ContentMediaBlock | RichTextBlock)[];
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: string;
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -342,10 +315,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
-      } | null)
-    | ({
-        relationTo: 'reusable-blocks';
-        value: string | ReusableBlock;
       } | null)
     | ({
         relationTo: 'users';
@@ -531,13 +500,6 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        ReusableBlocksBlock?:
-          | T
-          | {
-              reusableBlock?: T;
-              id?: T;
-              blockName?: T;
-            };
       };
   slug?: T;
   slugLock?: T;
@@ -579,152 +541,10 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "reusable-blocks_select".
- */
-export interface ReusableBlocksSelect<T extends boolean = true> {
-  title?: T;
-  blocks?:
-    | T
-    | {
-        Accordion?:
-          | T
-          | {
-              items?:
-                | T
-                | {
-                    heading?: T;
-                    content?: T;
-                    content_html?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        Hero?:
-          | T
-          | {
-              eyebrow?: T;
-              heading?: T;
-              subheading?: T;
-              buttons?:
-                | T
-                | {
-                    heroButton?:
-                      | T
-                      | {
-                          text?: T;
-                          url?: T;
-                          newWindow?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        SectionIntro?:
-          | T
-          | {
-              heading?: T;
-              subheading?: T;
-              text?: T;
-              alignment?: T;
-              id?: T;
-              blockName?: T;
-            };
-        CallToAction?:
-          | T
-          | {
-              heading?: T;
-              subheading?: T;
-              buttons?:
-                | T
-                | {
-                    ctaButton?:
-                      | T
-                      | {
-                          text?: T;
-                          url?: T;
-                          newWindow?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              theme?: T;
-              id?: T;
-              blockName?: T;
-            };
-        CardGrid?:
-          | T
-          | {
-              columns?: T;
-              cards?:
-                | T
-                | {
-                    image?: T;
-                    title?: T;
-                    description?: T;
-                    cardLink?:
-                      | T
-                      | {
-                          text?: T;
-                          url?: T;
-                          newWindow?: T;
-                          appearance?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        ContentMedia?:
-          | T
-          | {
-              layout?: T;
-              content?:
-                | T
-                | {
-                    heading?: T;
-                    body?: T;
-                    body_html?: T;
-                    buttons?:
-                      | T
-                      | {
-                          button?:
-                            | T
-                            | {
-                                text?: T;
-                                url?: T;
-                                newWindow?: T;
-                                appearance?: T;
-                              };
-                          id?: T;
-                        };
-                  };
-              image?: T;
-              theme?: T;
-              id?: T;
-              blockName?: T;
-            };
-        RichText?:
-          | T
-          | {
-              content?: T;
-              content_html?: T;
-              width?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
