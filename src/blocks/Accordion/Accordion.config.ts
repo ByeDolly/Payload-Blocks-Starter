@@ -1,4 +1,5 @@
 import { Block } from "payload";
+import { blockSpacingFields } from "@/fields/blockSpacingFields";
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical';
 
 export const Accordion: Block = {
@@ -6,31 +7,47 @@ export const Accordion: Block = {
 	interfaceName: "AccordionBlock",
 	fields: [
 		{
-			name: "items",
-			type: "array",
-			required: true,
-			minRows: 1,
-			admin: {
-				description: "Add one or more accordion items",
-			},
-			fields: [
+			type: "tabs",
+			tabs: [
 				{
-					name: "heading",
-					type: "text",
-					required: true,
+					label: "Content",
+					fields: [
+						{
+							name: "items",
+							type: "array",
+							required: true,
+							minRows: 1,
+							admin: {
+								description: "Add one or more accordion items",
+							},
+							fields: [
+								{
+									name: "heading",
+									type: "text",
+									required: true,
+								},
+								{
+									name: "content",
+									type: "richText",
+									required: true,
+									editor: lexicalEditor({
+										features: ({ defaultFeatures }) => [
+											...defaultFeatures,
+											HTMLConverterFeature({}),
+										],
+									}),
+								},
+								lexicalHTML('content', { name: 'content_html' }),
+							],
+						},
+					],
 				},
 				{
-					name: "content",
-					type: "richText",
-					required: true,
-					editor: lexicalEditor({
-						features: ({ defaultFeatures }) => [
-							...defaultFeatures,
-							HTMLConverterFeature({}),
-						],
-					}),
+					label: "Style",
+					fields: [
+						...blockSpacingFields,
+					],
 				},
-				lexicalHTML('content', { name: 'content_html' }),
 			],
 		},
 	],

@@ -12,19 +12,19 @@ const config: Config = {
 	safelist: [
 		{
 			pattern:
-				/^(bg|text|border|p|m|grid|flex|col|row|gap|space|w|h|prose)-.+/,
+				/^(bg|text|border|p|m|mt|mb|grid|flex|col|row|gap|space|w|h|prose)-.+/,
 		},
 	],
 	theme: {
 		extend: {
 			colors: {
 				background: "var(--background)",
-				foreground: "var(--foreground)",
+					foreground: "var(--foreground)",
 			},
 			borderRadius: {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",
-				sm: "calc(var(--radius) - 4px)",
+					sm: "calc(var(--radius) - 4px)",
 			},
 			keyframes: {
 				"accordion-down": {

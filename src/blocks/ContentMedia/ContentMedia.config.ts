@@ -1,7 +1,8 @@
 import { Block } from "payload";
 import { linkField } from "@/fields/link";
+import { blockSpacingFields } from "@/fields/blockSpacingFields";
 import {
-	HTMLConverterFeature,
+	HTMLConverterFeature, 
 	lexicalEditor,
 	lexicalHTML,
 } from "@payloadcms/richtext-lexical";
@@ -84,6 +85,7 @@ export const ContentMedia: Block = {
 								},
 							],
 						},
+						...blockSpacingFields,
 					],
 				},
 			],

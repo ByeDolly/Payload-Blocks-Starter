@@ -104,6 +104,8 @@ export interface AccordionBlock {
     content_html?: string | null;
     id?: string | null;
   }[];
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Accordion';
@@ -256,6 +258,8 @@ export interface ContentMediaBlock {
     | null;
   layout?: ('imageRight' | 'imageLeft') | null;
   theme?: ('light' | 'dark') | null;
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'ContentMedia';
@@ -385,6 +389,8 @@ export interface PagesSelect<T extends boolean = true> {
                     content_html?: T;
                     id?: T;
                   };
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };
@@ -487,6 +493,8 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               layout?: T;
               theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };
