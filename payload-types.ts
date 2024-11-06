@@ -172,7 +172,6 @@ export interface CallToAction {
  * via the `definition` "CardGrid".
  */
 export interface CardGrid {
-  columns?: ('2' | '3' | '4') | null;
   cards?:
     | {
         image?: (string | null) | Media;
@@ -187,6 +186,7 @@ export interface CardGrid {
         id?: string | null;
       }[]
     | null;
+  columns?: ('2' | '3' | '4') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'CardGrid';
@@ -225,38 +225,36 @@ export interface Media {
  * via the `definition` "ContentMediaBlock".
  */
 export interface ContentMediaBlock {
-  layout?: ('imageRight' | 'imageLeft') | null;
-  content: {
-    heading: string;
-    body: {
-      root: {
+  image?: (string | null) | Media;
+  heading: string;
+  body: {
+    root: {
+      type: string;
+      children: {
         type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
         version: number;
-      };
-      [k: string]: unknown;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
     };
-    body_html?: string | null;
-    buttons?:
-      | {
-          button: {
-            text: string;
-            url: string;
-            newWindow?: boolean | null;
-            appearance?: ('link' | 'default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
+    [k: string]: unknown;
   };
-  image: string | Media;
+  body_html?: string | null;
+  buttons?:
+    | {
+        button: {
+          text: string;
+          url: string;
+          newWindow?: boolean | null;
+          appearance?: ('link' | 'default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  layout?: ('imageRight' | 'imageLeft') | null;
   theme?: ('light' | 'dark') | null;
   id?: string | null;
   blockName?: string | null;
@@ -447,7 +445,6 @@ export interface PagesSelect<T extends boolean = true> {
         CardGrid?:
           | T
           | {
-              columns?: T;
               cards?:
                 | T
                 | {
@@ -464,34 +461,31 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              columns?: T;
               id?: T;
               blockName?: T;
             };
         ContentMedia?:
           | T
           | {
-              layout?: T;
-              content?:
+              image?: T;
+              heading?: T;
+              body?: T;
+              body_html?: T;
+              buttons?:
                 | T
                 | {
-                    heading?: T;
-                    body?: T;
-                    body_html?: T;
-                    buttons?:
+                    button?:
                       | T
                       | {
-                          button?:
-                            | T
-                            | {
-                                text?: T;
-                                url?: T;
-                                newWindow?: T;
-                                appearance?: T;
-                              };
-                          id?: T;
+                          text?: T;
+                          url?: T;
+                          newWindow?: T;
+                          appearance?: T;
                         };
+                    id?: T;
                   };
-              image?: T;
+              layout?: T;
               theme?: T;
               id?: T;
               blockName?: T;
