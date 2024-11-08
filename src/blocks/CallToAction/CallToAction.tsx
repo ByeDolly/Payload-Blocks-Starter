@@ -2,60 +2,47 @@ import React from 'react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
+import type { CallToActionBlock as CallToActionBlockType } from "../../../payload-types"
 
-type LinkType = {
-    text: string
-    url: string
-    newWindow: boolean
-    appearance: 'link' | 'default' | 'outline'
-}
+export const CallToActionBlock: React.FC<CallToActionBlockType & {
+}> = (props) => {
+    const isDark = props.theme === 'dark';
 
-export const CallToActionBlock: React.FC<{
-    heading?: string
-    subheading?: string
-    buttons?: { ctaButton: LinkType }[]
-    theme?: 'light' | 'dark'
-    className?: string
-}> = ({ heading, subheading, buttons, theme = 'light', className }) => {
     return (
         <section className={cn(
-            "relative py-24 my-4",
-            theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50',
-            className
+            "relative py-24",
+            `mt-${props.marginTop}`,
+            `mb-${props.marginBottom}`,
+            isDark ? 'bg-gray-900' : 'bg-gray-50'
         )}>
             <div className="container px-4 md:px-6 mx-auto">
                 <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-                    {heading && (
+                    {props.heading && (
                         <h2 className={cn(
                             "text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl",
-                            theme === 'dark' ? 'text-white' : 'text-gray-900'
+                            isDark ? 'text-white' : 'text-gray-900'
                         )}>
-                            {heading}
+                            {props.heading}
                         </h2>
                     )}
-                    {subheading && (
+                    {props.subheading && (
                         <p className={cn(
                             "mt-4 text-lg md:text-xl",
-                            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                            isDark ? 'text-gray-300' : 'text-gray-600'
                         )}>
-                            {subheading}
+                            {props.subheading}
                         </p>
                     )}
 
-                    {buttons && buttons.length > 0 && (
+                    {props.buttons && props.buttons.length > 0 && (
                         <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-                            {buttons.map(({ ctaButton }, index) => (
+                            {props.buttons.map(({ ctaButton }, index) => (
                                 <Link
                                     key={index}
                                     href={ctaButton.url}
                                     target={ctaButton.newWindow ? '_blank' : undefined}
                                 >
-                                    <Button
-                                        variant={ctaButton.appearance}
-                                        size="lg"
-                                        theme={theme}
-                                        className="h-12 px-6"
-                                    >
+                                    <Button variant={ctaButton.appearance} theme={props.theme}>
                                         {ctaButton.text}
                                     </Button>
                                 </Link>

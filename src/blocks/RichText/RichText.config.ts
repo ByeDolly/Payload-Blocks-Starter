@@ -1,4 +1,5 @@
 import { Block } from "payload";
+import { blockSpacingFields } from "@/fields/blockSpacingFields";
 import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical';
 
 export const RichText: Block = {
@@ -6,33 +7,49 @@ export const RichText: Block = {
   interfaceName: "RichTextBlock",
   fields: [
     {
-      name: "content",
-      type: "richText",
-      required: true,
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [
-          ...defaultFeatures,
-          HTMLConverterFeature({}),
-        ],
-      }),
-    },
-    lexicalHTML('content', { name: 'content_html' }),
-    {
-      name: "width",
-      type: "select",
-      defaultValue: "default",
-      options: [
+      type: "tabs",
+      tabs: [
         {
-          label: "Narrow",
-          value: "narrow",
+          label: "Content",
+          fields: [
+            {
+              name: "content",
+              type: "richText",
+              required: true,
+              editor: lexicalEditor({
+                features: ({ defaultFeatures }) => [
+                  ...defaultFeatures,
+                  HTMLConverterFeature({}),
+                ],
+              }),
+            },
+            lexicalHTML('content', { name: 'content_html' }),
+          ],
         },
         {
-          label: "Default",
-          value: "default",
-        },
-        {
-          label: "Wide",
-          value: "wide",
+          label: "Style",
+          fields: [
+            {
+              name: "width",
+              type: "select",
+              defaultValue: "default",
+              options: [
+                {
+                  label: "Narrow",
+                  value: "narrow",
+                },
+                {
+                  label: "Default",
+                  value: "default",
+                },
+                {
+                  label: "Wide",
+                  value: "wide",
+                },
+              ],
+            },
+            ...blockSpacingFields({ marginTop: 4, marginBottom: 4 }),
+          ],
         },
       ],
     },

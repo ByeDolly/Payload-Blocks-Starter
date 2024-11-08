@@ -1,26 +1,25 @@
 import React from 'react'
 import { cn } from "@/lib/utils"
+import type { RichTextBlock as RichTextBlockType } from "../../../payload-types"
 
-type RichTextProps = {
-  content_html: string
-  width?: 'narrow' | 'default' | 'wide'
-  className?: string
-}
-
-export const RichTextBlock: React.FC<RichTextProps> = ({
-  content_html,
-  width = 'default',
-  className,
-}) => {
+export const RichTextBlock: React.FC<RichTextBlockType & {
+}> = (props) => {
   const maxWidth = {
     narrow: 'max-w-2xl',
     default: 'max-w-4xl',
     wide: 'max-w-6xl',
-  }[width]
+  }[props.width || 'default']
 
   return (
-    <div className={cn("container mx-auto px-4 md:px-6 py-12", className)}>
-        <div className={cn("prose-lg mx-auto", maxWidth)} dangerouslySetInnerHTML={{ __html: content_html }} />
-    </div>
+    <section className={cn(
+      "container mx-auto px-4 md:px-6 py-12",
+      `mt-${props.marginTop}`,
+      `mb-${props.marginBottom}`
+    )}>
+      <div 
+        className={cn("prose-lg mx-auto", maxWidth)} 
+        dangerouslySetInnerHTML={{ __html: props.content_html }} 
+      />
+    </section>
   )
 } 

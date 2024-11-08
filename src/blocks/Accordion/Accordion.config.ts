@@ -5,7 +5,7 @@ import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/ri
 export const Accordion: Block = {
 	slug: "Accordion",
 	interfaceName: "AccordionBlock",
-	fields: [
+	fields: [ 
 		{
 			type: "tabs",
 			tabs: [
@@ -45,7 +45,7 @@ export const Accordion: Block = {
 				{
 					label: "Style",
 					fields: [
-						...blockSpacingFields,
+						...blockSpacingFields({ marginTop: 8, marginBottom: 8 }),
 					],
 				},
 			],

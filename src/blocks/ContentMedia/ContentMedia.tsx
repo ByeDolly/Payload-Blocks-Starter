@@ -11,9 +11,10 @@ export const ContentMediaBlock: React.FC<ContentMediaBlockType & {
     const isDark = props.theme === "dark";
 
     return (
-        <section className={cn("container mx-auto max-w-6xl", 
-            props.marginTop ? `mt-${props.marginTop}` : "mt-4",
-            props.marginBottom ? `mb-${props.marginBottom}` : "mb-4"
+        <section className={cn(
+            "container mx-auto max-w-6xl", 
+            `mt-${props.marginTop}`,
+            `mb-${props.marginBottom}`
         )}>
             <div className={cn("grid lg:grid-cols-2 items-stretch", isDark ? "bg-gray-900" : "bg-gray-50")}>
                 {/* Image Side - Always first on mobile */}

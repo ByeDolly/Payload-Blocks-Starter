@@ -85,7 +85,7 @@ export const ContentMedia: Block = {
 								},
 							],
 						},
-						...blockSpacingFields,
+						...blockSpacingFields({ marginTop: 4, marginBottom: 4 }),
 					],
 				},
 			],

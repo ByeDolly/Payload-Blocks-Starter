@@ -66,7 +66,15 @@ export interface Page {
   id: string;
   title?: string | null;
   pageBlocks?:
-    | (AccordionBlock | Hero | SectionIntro | CallToAction | CardGrid | ContentMediaBlock | RichTextBlock)[]
+    | (
+        | AccordionBlock
+        | HeroBlock
+        | SectionIntroBlock
+        | CallToActionBlock
+        | CardGridBlock
+        | ContentMediaBlock
+        | RichTextBlock
+      )[]
     | null;
   slug?: string | null;
   slugLock?: boolean | null;
@@ -112,9 +120,9 @@ export interface AccordionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero".
+ * via the `definition` "HeroBlock".
  */
-export interface Hero {
+export interface HeroBlock {
   eyebrow?: string | null;
   heading: string;
   subheading?: string | null;
@@ -129,28 +137,32 @@ export interface Hero {
         id?: string | null;
       }[]
     | null;
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'Hero';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "SectionIntro".
+ * via the `definition` "SectionIntroBlock".
  */
-export interface SectionIntro {
+export interface SectionIntroBlock {
   heading: string;
   subheading?: string | null;
   text?: string | null;
   alignment?: ('left' | 'center') | null;
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'SectionIntro';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CallToAction".
+ * via the `definition` "CallToActionBlock".
  */
-export interface CallToAction {
+export interface CallToActionBlock {
   heading: string;
   subheading?: string | null;
   buttons?:
@@ -165,15 +177,17 @@ export interface CallToAction {
       }[]
     | null;
   theme?: ('light' | 'dark') | null;
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'CallToAction';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardGrid".
+ * via the `definition` "CardGridBlock".
  */
-export interface CardGrid {
+export interface CardGridBlock {
   cards?:
     | {
         image?: (string | null) | Media;
@@ -189,6 +203,8 @@ export interface CardGrid {
       }[]
     | null;
   columns?: ('2' | '3' | '4') | null;
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'CardGrid';
@@ -286,6 +302,8 @@ export interface RichTextBlock {
   };
   content_html?: string | null;
   width?: ('narrow' | 'default' | 'wide') | null;
+  marginTop?: number | null;
+  marginBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'RichText';
@@ -413,6 +431,8 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     id?: T;
                   };
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };
@@ -423,6 +443,8 @@ export interface PagesSelect<T extends boolean = true> {
               subheading?: T;
               text?: T;
               alignment?: T;
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };
@@ -445,6 +467,8 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               theme?: T;
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };
@@ -468,6 +492,8 @@ export interface PagesSelect<T extends boolean = true> {
                     id?: T;
                   };
               columns?: T;
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };
@@ -504,6 +530,8 @@ export interface PagesSelect<T extends boolean = true> {
               content?: T;
               content_html?: T;
               width?: T;
+              marginTop?: T;
+              marginBottom?: T;
               id?: T;
               blockName?: T;
             };

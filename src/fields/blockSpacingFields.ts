@@ -1,13 +1,18 @@
 import type { Field } from 'payload'
 
-export const blockSpacingFields: Field[] = [
+type SpacingDefaults = {
+  marginTop?: number;
+  marginBottom?: number;
+}
+
+export const blockSpacingFields = ({ marginTop = null, marginBottom = null }: SpacingDefaults = {}): Field[] => [
   {
     name: "marginTop",
     type: "number",
     label: "Margin Top",
     min: 0,
     max: 32,
-    defaultValue: null,
+    defaultValue: marginTop,
     admin: {
       description: "Space above the block (0-32)",
     },
@@ -18,9 +23,9 @@ export const blockSpacingFields: Field[] = [
     label: "Margin Bottom",
     min: 0,
     max: 32,
-    defaultValue: null,
+    defaultValue: marginBottom,
     admin: {
       description: "Space below the block (0-32)",
     },
   },
-] as const; 
+]; 

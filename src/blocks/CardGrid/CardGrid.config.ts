@@ -1,9 +1,10 @@
 import { Block } from "payload";
 import { linkField } from "@/fields/link";
+import { blockSpacingFields } from "@/fields/blockSpacingFields";
 
 export const CardGrid: Block = {
 	slug: "CardGrid",
-	interfaceName: "CardGrid",
+	interfaceName: "CardGridBlock",
 	fields: [
 		{
 			type: "tabs",
@@ -65,6 +66,7 @@ export const CardGrid: Block = {
 								},
 							],
 						},
+						...blockSpacingFields({ marginTop: 4, marginBottom: 4 }),
 					],
 				},
 			],

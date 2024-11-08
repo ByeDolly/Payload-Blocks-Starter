@@ -11,45 +11,30 @@ import {
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
 import Image from 'next/image'
+import type { CardGridBlock as CardGridBlockType } from "../../../payload-types"
 
-type LinkType = {
-  text: string
-  url: string
-  newWindow: boolean
-  appearance: 'link' | 'button' | 'button-outline'
-}
-
-type CardType = {
-  image?: {
-    url: string
-    alt: string
-  }
-  title: string
-  description?: string
-  cardLink?: LinkType
-}
-
-export const CardGridBlock: React.FC<{
-  cards?: CardType[]
-  columns?: '2' | '3' | '4'
-  className?: string
-}> = ({ cards, columns = '3', className }) => {
-  if (!cards?.length) return null
+export const CardGridBlock: React.FC<CardGridBlockType & {
+}> = (props) => {
+  if (!props.cards?.length) return null
 
   const gridCols = {
     '2': 'md:grid-cols-2',
     '3': 'md:grid-cols-3',
     '4': 'md:grid-cols-2 lg:grid-cols-4',
-  }
+  }[props.columns || '2']
 
   return (
-    <section className={cn("relative py-24 bg-white", className)}>
+    <section className={cn(
+      "relative py-24 bg-white",
+      `mt-${props.marginTop}`,
+      `mb-${props.marginBottom}`
+    )}>
       <div className="container relative px-4 md:px-6 mx-auto max-w-6xl">
         <div className={cn(
           "grid grid-cols-1 gap-6",
-          gridCols[columns]
+          gridCols
         )}>
-          {cards.map((card, i) => (
+          {props.cards.map((card, i) => (
             <Card key={i} className="overflow-hidden">
               {card.image && (
                 <div className="relative w-full pt-[56.25%]">
