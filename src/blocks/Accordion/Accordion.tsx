@@ -14,7 +14,7 @@ export const AccordionBlock: React.FC<AccordionBlockType & {
 
     return (
         <section className={cn(
-            "container mx-auto max-w-5xl", 
+            "container mx-auto max-w-5xl px-4 md:px-6", 
             `mt-${props.marginTop}`,
             `mb-${props.marginBottom}`
         )}>
