@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from "@/lib/utils"
+import { cn } from "@/utilities/tailwindMerge"
 import type { SectionIntroBlock as SectionIntroBlockType } from "../../../payload-types"
 
 export const SectionIntroBlock: React.FC<SectionIntroBlockType & {

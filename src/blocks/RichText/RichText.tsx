@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from "@/lib/utils"
+import { cn } from "@/utilities/tailwindMerge"
 import type { RichTextBlock as RichTextBlockType } from "../../../payload-types"
 
 export const RichTextBlock: React.FC<RichTextBlockType & {
