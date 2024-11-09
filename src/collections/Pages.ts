@@ -10,46 +10,54 @@ import { slugField } from "@/fields/slug";
 import { generatePreviewPath } from "@/utilities/generatePreviewPath";
 
 export const Pages: CollectionConfig = {
-	slug: "pages",
-	fields: [
-		{
-			name: "title",
-			type: "text",
-		},
-		{
-			name: "pageBlocks",
-			type: "blocks",
-			blocks: [
-				Accordion,
-				Hero,
-				SectionIntro,
-				CallToAction,
-				CardGrid,
-				ContentMedia,
-				RichText,
-			],
-		},
-		...slugField(),
-	],
-	versions: {
-		drafts: {
-			autosave: {
-				interval: 375,
-			},
-		},
-	},
+    slug: "pages",
+    fields: [
+        {
+            name: "title",
+            type: "text",
+        },
+        {
+            name: "pageBlocks",
+            type: "blocks",
+            blocks: [
+                Accordion,
+                Hero,
+                SectionIntro,
+                CallToAction,
+                CardGrid,
+                ContentMedia,
+                RichText,
+            ],
+        },
+        ...slugField(),
+    ],
+    versions: {
+        drafts: {
+            autosave: {
+                interval: 375,
+            },
+        },
+    },
     admin: {
         group: "Content",
         defaultColumns: ['title', 'slug', 'createdAt', 'status'],
         livePreview: {
             url: ({ data }) => {
-              const path = generatePreviewPath({
+                const path = generatePreviewPath({
+                    slug: typeof data?.slug === 'string' ? data.slug : '',
+                    collection: 'pages',
+                })
+
+                return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
+            },
+        },
+        preview: (data) => {
+            const path = generatePreviewPath({
                 slug: typeof data?.slug === 'string' ? data.slug : '',
                 collection: 'pages',
-              })
-      
-              return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
-            },
-          },
-      },
+            })
+
+            return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
+        },
+    },
 };

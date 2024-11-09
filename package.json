@@ -10,11 +10,11 @@
     "payload": "PAYLOAD_CONFIG_PATH=./src/payload.config.ts payload"
   },
   "dependencies": {
-    "@payloadcms/db-mongodb": "^3.0.0-beta.123",
-    "@payloadcms/live-preview-react": "^3.0.0-beta.123",
-    "@payloadcms/next": "^3.0.0-beta.123",
-    "@payloadcms/plugin-seo": "^3.0.0-beta.123",
-    "@payloadcms/richtext-lexical": "^3.0.0-beta.123",
+    "@payloadcms/db-mongodb": "3.0.0-beta.126",
+    "@payloadcms/live-preview-react": "3.0.0-beta.126",
+    "@payloadcms/next": "3.0.0-beta.126",
+    "@payloadcms/plugin-seo": "3.0.0-beta.126",
+    "@payloadcms/richtext-lexical": "3.0.0-beta.126",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-navigation-menu": "^1.2.1",
@@ -26,7 +26,7 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.454.0",
     "next": "15.0.2",
-    "payload": "^3.0.0-beta.123",
+    "payload": "3.0.0-beta.126",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "sharp": "^0.33.5",
@@ -43,5 +43,5 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }
