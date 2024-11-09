@@ -55,13 +55,15 @@ const ListItem = React.forwardRef<
           ref={ref}
           href={href || "#"}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors",
+            "hover:bg-gray-50 hover:text-gray-900",
+            "focus:bg-gray-50 focus:text-gray-900 focus:outline-none",
             className
           )}
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="line-clamp-2 text-sm leading-snug text-gray-500 mt-1.5">
             {children}
           </p>
         </Link>
@@ -71,9 +73,9 @@ const ListItem = React.forwardRef<
 })
 ListItem.displayName = "ListItem"
 
-export const Header: React.FC = () => {
+export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-white supports-[backdrop-filter]:bg-white/95 backdrop-blur">
       <div className="container mx-auto max-w-6xl px-4 md:px-6">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
@@ -129,7 +131,7 @@ export const Header: React.FC = () => {
                             <Link
                               key={item.name}
                               href={item.href}
-                              className="text-sm text-muted-foreground hover:text-primary"
+                              className="text-sm text-bg-gray-100-foreground hover:text-primary"
                             >
                               {item.name}
                             </Link>
