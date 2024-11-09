@@ -16,6 +16,8 @@
     "@payloadcms/plugin-seo": "^3.0.0-beta.123",
     "@payloadcms/richtext-lexical": "^3.0.0-beta.123",
     "@radix-ui/react-accordion": "^1.2.1",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-navigation-menu": "^1.2.1",
     "@tailwindcss/typography": "^0.5.15",
     "add": "^2.0.6",
     "class-variance-authority": "^0.7.0",

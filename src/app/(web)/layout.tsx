@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
+import { Header } from "@/components/Header";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -27,6 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <LivePreviewListener />
+                <Header />
                 {children}
             </body>
         </html>
