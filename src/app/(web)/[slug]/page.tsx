@@ -16,15 +16,15 @@ import { generateMeta } from '@/utilities/generateMetadata'
 const getPage = cache(async (slug: string) => {
     // Check if we're in draft mode (preview mode)
     const { isEnabled: draft } = await draftMode()
-    
+
     // Initialize Payload with HMR support
     const payload = await getPayloadHMR({ config: configPromise })
 
     // Query the 'pages' collection
     const result = await payload.find({
         collection: 'pages',
-        draft,                    
-        limit: 1,                 
+        draft,
+        limit: 1,
         overrideAccess: true,     // Bypass access control for public pages
         where: {
             slug: { equals: slug },  // Find page by slug
