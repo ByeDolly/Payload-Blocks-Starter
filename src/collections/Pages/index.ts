@@ -37,6 +37,7 @@ export const Pages: CollectionConfig = {
                         {
                             name: "pageBlocks",
                             type: "blocks",
+                            label: false,
                             blocks: [
                                 Accordion,
                                 Hero,
@@ -77,19 +78,20 @@ export const Pages: CollectionConfig = {
         ...slugField(),
     ],
    
-    // access: {
-    //     create: authenticated, // Must be logged in to create Pages
-    //     delete: authenticated, // Must be logged in to delete Pages
-    //     read: published, // Only published Pages are visible
-    //     update: authenticated, // Must be logged in to edit Pages
-    // },
+    access: {
+        create: authenticated, // Must be logged in to create Pages
+        delete: authenticated, // Must be logged in to delete Pages
+        read: published, // Only published Pages are visible
+        update: authenticated, // Must be logged in to edit Pages
+    },
 
     versions: {
         drafts: {
             autosave: {
-                interval: 500,
+                interval: 100, // We set this interval for optimal live preview
             },
         },
+        maxPerDoc: 50,
     },
     
     admin: {
