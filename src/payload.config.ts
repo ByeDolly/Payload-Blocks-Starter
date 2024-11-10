@@ -7,16 +7,18 @@ import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 
 import { Pages } from "./collections/Pages";
+import { Posts } from "./collections/Posts";
+
 import { Media } from "./collections/Media";
 import Users from "./collections/Users";
 
 export default buildConfig({
 	// Define and configure your collections in this array
-	collections: [Pages, Media, Users],
+	collections: [Pages, Posts, Media, Users],
 
 	plugins: [
 		seoPlugin({
-			collections: ["pages"],
+			collections: [],
 			uploadsCollection: "media",
             tabbedUI: true,
 			generateTitle: ({ doc }) => `Website.com — ${doc.title}`,

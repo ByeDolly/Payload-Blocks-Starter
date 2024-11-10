@@ -1,19 +1,6 @@
 import type { CollectionConfig } from 'payload'
-
-import {
-    BlocksFeature,
-    FixedToolbarFeature,
-    HeadingFeature,
-    HorizontalRuleFeature,
-    InlineToolbarFeature,
-    lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Banner } from '../../blocks/Banner/config'
-import { Code } from '../../blocks/Code/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { authenticated } from '@/access/authenticated'
+import { published } from '@/access/published'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidatePost } from './hooks/revalidatePost'
@@ -29,12 +16,12 @@ import { slugField } from '@/fields/slug'
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
-    access: {
-        create: authenticated,
-        delete: authenticated,
-        read: authenticatedOrPublished,
-        update: authenticated,
-    },
+    // access: {
+    //     create: authenticated,
+    //     delete: authenticated,
+    //     read: published,
+    //     update: authenticated,
+    // },
     admin: {
         defaultColumns: ['title', 'slug', 'updatedAt'],
         livePreview: {
@@ -71,53 +58,11 @@ export const Posts: CollectionConfig = {
                         {
                             name: 'content',
                             type: 'richText',
-                            editor: lexicalEditor({
-                                features: ({ rootFeatures }) => {
-                                    return [
-                                        ...rootFeatures,
-                                        HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                                        BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                                        FixedToolbarFeature(),
-                                        InlineToolbarFeature(),
-                                        HorizontalRuleFeature(),
-                                    ]
-                                },
-                            }),
                             label: false,
                             required: true,
                         },
                     ],
                     label: 'Content',
-                },
-                {
-                    fields: [
-                        {
-                            name: 'relatedPosts',
-                            type: 'relationship',
-                            admin: {
-                                position: 'sidebar',
-                            },
-                            filterOptions: ({ id }) => {
-                                return {
-                                    id: {
-                                        not_in: [id],
-                                    },
-                                }
-                            },
-                            hasMany: true,
-                            relationTo: 'posts',
-                        },
-                        {
-                            name: 'categories',
-                            type: 'relationship',
-                            admin: {
-                                position: 'sidebar',
-                            },
-                            hasMany: true,
-                            relationTo: 'categories',
-                        },
-                    ],
-                    label: 'Meta',
                 },
                 {
                     name: 'meta',
@@ -131,11 +76,10 @@ export const Posts: CollectionConfig = {
                         MetaTitleField({
                             hasGenerateFn: true,
                         }),
+                        MetaDescriptionField({}),
                         MetaImageField({
                             relationTo: 'media',
                         }),
-
-                        MetaDescriptionField({}),
                         PreviewField({
                             // if the `generateUrl` function is configured
                             hasGenerateFn: true,
