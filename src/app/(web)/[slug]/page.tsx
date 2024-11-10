@@ -5,9 +5,7 @@ import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMetadata'
-import { RefreshRouteOnSave } from "@/components/RefreshRouteOnSave";
-// Update this line to match the correct path to PageClient
-import PageClient from '@/components/PageClient'
+
 /**
  * This function fetches a single page from Payload CMS.
  * - Uses React's cache to prevent duplicate requests
@@ -72,5 +70,9 @@ export default async function Page({
 
     if (!page) return null
 
-    return <PageClient page={page} />
+    return (
+        <article>
+            <RenderBlocks blocks={page.pageBlocks || []} />
+        </article>
+    )
 }
