@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-const prompts = require('prompts');
-const chalk = require('chalk');
-const ora = require('ora');
-const fs = require('fs/promises');
-const path = require('path');
-const crypto = require('crypto');
-const { execa } = require('execa');
+import prompts from 'prompts';
+import chalk from 'chalk';
+import ora from 'ora';
+import { promises as fs } from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import { execa } from 'execa';
 
 async function generateSecret(length = 32) {
   return crypto.randomBytes(length).toString('hex');
