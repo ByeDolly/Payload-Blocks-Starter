@@ -68,6 +68,8 @@ async function main() {
     const packageJsonPath = path.join(projectPath, 'package.json');
     const packageJson = JSON.parse(await fs.readFile(packageJsonPath, 'utf-8'));
     packageJson.name = response.projectName;
+    // Remove the bin field since it's not needed in the new project
+    delete packageJson.bin;
     await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
     // Create .env file
@@ -100,6 +102,13 @@ NEXT_PUBLIC_URL=http://localhost:3000
       );
       await fs.writeFile(configPath, configContent);
     }
+
+    // Clean up - remove bin directory and script dependencies
+    const dependenciesToRemove = ['prompts', 'chalk', 'ora', 'execa'];
+    for (const dep of dependenciesToRemove) {
+      delete packageJson.dependencies[dep];
+    }
+    await fs.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
     spinner.succeed(chalk.green('Project created successfully!'));
     
