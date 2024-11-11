@@ -1,7 +1,6 @@
 {
   "name": "payload-blocks-starter",
   "version": "0.1.0",
-  "bin": "./bin/cli.js",
   "type": "module",
   "private": true,
   "scripts": {
