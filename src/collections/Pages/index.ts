@@ -97,6 +97,7 @@ export const Pages: CollectionConfig = {
                 const path = generatePreviewPath({
                     slug: typeof data?.slug === 'string' ? data.slug : '',
                     collection: 'pages',
+                    prefix: ''
                 })
 
                 return `${process.env.PAYLOAD_PUBLIC_URL}${path}`

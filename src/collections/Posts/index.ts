@@ -155,6 +155,7 @@ export const Posts: CollectionConfig = {
                 const path = generatePreviewPath({
                     slug: typeof data?.slug === 'string' ? data.slug : '',
                     collection: 'posts',
+                    prefix: '/posts'
                 })
 
                 return `${process.env.NEXT_PUBLIC_URL}${path}`

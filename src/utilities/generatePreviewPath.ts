@@ -1,17 +1,11 @@
-import { CollectionSlug } from 'payload'
-
-const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
-  posts: '/posts',
-  pages: '',
-}
-
 type Props = {
-  collection: keyof typeof collectionPrefixMap
   slug: string
+  collection: string
+  prefix?: string
 }
 
-export const generatePreviewPath = ({ collection, slug }: Props) => {
-  const path = `${collectionPrefixMap[collection]}/${slug}`
+export const generatePreviewPath = ({ collection, slug, prefix = '' }: Props) => {
+  const path = `${prefix}/${slug}`.replace(/\/+/g, '/')  // Handles cases where prefix might be empty
 
   const params = {
     slug,

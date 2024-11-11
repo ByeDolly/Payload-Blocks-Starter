@@ -26,12 +26,22 @@ import { Menu } from "lucide-react"
 import { cn } from "@/utilities/tailwindMerge"
 
 const navigation = {
+  solutions: {
+    name: 'Solutions',
+    items: [
+      { name: 'Analytics', href: '/analytics', description: 'Get insights into your business performance' },
+      { name: 'Automation', href: '/automation', description: 'Streamline your workflow processes' },
+      { name: 'Security', href: '/security', description: 'Protect your business with enterprise security' },
+      { name: 'Integration', href: '/integration', description: 'Connect with your favorite tools' },
+    ],
+  },
   company: {
     name: 'Company',
     items: [
       { name: 'About', href: '/about', description: 'Learn more about our mission and values' },
       { name: 'Blog', href: '/blog', description: 'Read our latest news and articles' },
       { name: 'Careers', href: '/careers', description: 'Join our growing team' },
+      { name: 'Press', href: '/press', description: 'Latest news and media coverage' },
     ],
   },
   resources: {
@@ -40,7 +50,12 @@ const navigation = {
       { name: 'Documentation', href: '/docs', description: 'Start integrating our products' },
       { name: 'Help Center', href: '/help', description: 'Get help from our support team' },
       { name: 'Contact', href: '/contact', description: 'Get in touch with us' },
+      { name: 'Partners', href: '/partners', description: 'Join our partner ecosystem' },
     ],
+  },
+  pricing: {
+    name: 'Pricing',
+    href: '/pricing',
   },
 }
 
@@ -87,20 +102,30 @@ export function Header() {
             <NavigationMenuList>
               {Object.values(navigation).map((section) => (
                 <NavigationMenuItem key={section.name}>
-                  <NavigationMenuTrigger>{section.name}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                      {section.items.map((item) => (
-                        <ListItem
-                          key={item.name}
-                          title={item.name}
-                          href={item.href}
-                        >
-                          {item.description}
-                        </ListItem>
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
+                  {section.items ? (
+                    <>
+                      <NavigationMenuTrigger>{section.name}</NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                          {section.items.map((item) => (
+                            <ListItem
+                              key={item.name}
+                              title={item.name}
+                              href={item.href}
+                            >
+                              {item.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <Link href={section.href} legacyBehavior passHref>
+                      <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                        {section.name}
+                      </NavigationMenuLink>
+                    </Link>
+                  )}
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
@@ -119,28 +144,40 @@ export function Header() {
               </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
-                  <SheetTitle>Navigation</SheetTitle>
+                  <SheetTitle>Menu</SheetTitle>
                 </SheetHeader>
-                <Accordion type="single" collapsible className="w-full">
+                <div className="flex flex-col space-y-2">
                   {Object.values(navigation).map((section) => (
-                    <AccordionItem key={section.name} value={section.name}>
-                      <AccordionTrigger className="text-sm">{section.name}</AccordionTrigger>
-                      <AccordionContent>
-                        <div className="flex flex-col space-y-2">
-                          {section.items.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              className="text-sm text-bg-gray-100-foreground hover:text-primary"
-                            >
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
+                    section.items ? (
+                      <Accordion key={section.name} type="single" collapsible className="w-full">
+                        <AccordionItem value={section.name}>
+                          <AccordionTrigger className="text-sm">{section.name}</AccordionTrigger>
+                          <AccordionContent>
+                            <div className="flex flex-col space-y-2">
+                              {section.items.map((item) => (
+                                <Link
+                                  key={item.name}
+                                  href={item.href}
+                                  className="text-sm text-bg-gray-100-foreground hover:text-primary"
+                                >
+                                  {item.name}
+                                </Link>
+                              ))}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    ) : (
+                      <Link
+                        key={section.name}
+                        href={section.href}
+                        className="flex h-10 items-center text-sm hover:text-primary"
+                      >
+                        {section.name}
+                      </Link>
+                    )
                   ))}
-                </Accordion>
+                </div>
                 <Button className="mt-6 w-full">Get Started</Button>
               </SheetContent>
             </Sheet>
