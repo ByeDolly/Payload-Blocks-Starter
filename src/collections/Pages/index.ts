@@ -31,7 +31,7 @@ export const Pages: CollectionConfig = {
         {
             type: 'tabs',
             tabs: [
-                {
+                { 
                     label: 'Content',
                     fields: [
                         {
@@ -54,11 +54,6 @@ export const Pages: CollectionConfig = {
                     name: 'meta',
                     label: 'SEO',
                     fields: [
-                        OverviewField({
-                            titlePath: 'meta.title',
-                            descriptionPath: 'meta.description',
-                            imagePath: 'meta.image',
-                        }),
                         MetaTitleField({
                             hasGenerateFn: true,
                         }),

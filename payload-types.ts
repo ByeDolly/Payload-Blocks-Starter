@@ -333,6 +333,9 @@ export interface Post {
     };
     [k: string]: unknown;
   };
+  content_html?: string | null;
+  excerpt?: string | null;
+  featuredImage?: (string | null) | Media;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -587,7 +590,6 @@ export interface PagesSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
@@ -606,10 +608,12 @@ export interface PagesSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   content?: T;
+  content_html?: T;
+  excerpt?: T;
+  featuredImage?: T;
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;

@@ -1,49 +1,21 @@
 import type { CollectionConfig } from 'payload'
+import { HTMLConverterFeature, lexicalEditor, lexicalHTML } from '@payloadcms/richtext-lexical';
 import { authenticated } from '@/access/authenticated'
 import { published } from '@/access/published'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidatePost } from './hooks/revalidatePost'
-
+import { slugField } from '@/fields/slug'
 import {
     MetaDescriptionField,
     MetaImageField,
     MetaTitleField,
-    OverviewField,
     PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { slugField } from '@/fields/slug'
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
-    access: {
-        create: authenticated,
-        delete: authenticated,
-        read: published,
-        update: authenticated,
-    },
-    admin: {
-        defaultColumns: ['title', 'slug', 'updatedAt'],
-        livePreview: {
-            url: ({ data }) => {
-                const path = generatePreviewPath({
-                    slug: typeof data?.slug === 'string' ? data.slug : '',
-                    collection: 'posts',
-                })
 
-                return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
-            },
-        },
-        preview: (data) => {
-            const path = generatePreviewPath({
-                slug: typeof data?.slug === 'string' ? data.slug : '',
-                collection: 'posts',
-            })
-
-            return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
-        },
-        useAsTitle: 'title',
-    },
     fields: [
         {
             name: 'title',
@@ -54,25 +26,36 @@ export const Posts: CollectionConfig = {
             type: 'tabs',
             tabs: [
                 {
-                    fields: [
+                    label: 'Content',
+                    fields: [  
                         {
                             name: 'content',
                             type: 'richText',
-                            label: false,
                             required: true,
+                            label: false,
+                            editor: lexicalEditor({
+                                features: ({ defaultFeatures }) => [
+                                    ...defaultFeatures,
+                                    HTMLConverterFeature({}),
+                                ],
+                            }),
+                        },
+                        lexicalHTML('content', { name: 'content_html' }),
+                        {
+                            name: 'excerpt',
+                            type: 'textarea',
+                        },
+                        {
+                            name: 'featuredImage',
+                            type: 'upload',
+                            relationTo: 'media',
                         },
                     ],
-                    label: 'Content',
                 },
                 {
                     name: 'meta',
                     label: 'SEO',
                     fields: [
-                        OverviewField({
-                            titlePath: 'meta.title',
-                            descriptionPath: 'meta.description',
-                            imagePath: 'meta.image',
-                        }),
                         MetaTitleField({
                             hasGenerateFn: true,
                         }),
@@ -147,10 +130,14 @@ export const Posts: CollectionConfig = {
         },
         ...slugField(),
     ],
-    hooks: {
-        afterChange: [revalidatePost],
-        afterRead: [populateAuthors],
+
+    access: {
+        create: authenticated,
+        delete: authenticated,
+        read: published,
+        update: authenticated,
     },
+
     versions: {
         drafts: {
             autosave: {
@@ -159,4 +146,34 @@ export const Posts: CollectionConfig = {
         },
         maxPerDoc: 50,
     },
+
+    admin: {
+        group: "Content",
+        defaultColumns: ['title', 'slug', 'updatedAt'],
+        livePreview: {
+            url: ({ data }) => {
+                const path = generatePreviewPath({
+                    slug: typeof data?.slug === 'string' ? data.slug : '',
+                    collection: 'posts',
+                })
+
+                return `${process.env.NEXT_PUBLIC_URL}${path}`
+            },
+        },
+        preview: (data) => {
+            const path = generatePreviewPath({
+                slug: typeof data?.slug === 'string' ? data.slug : '',
+                collection: 'posts',
+            })
+
+            return `${process.env.NEXT_PUBLIC_URL}${path}`
+        },
+        useAsTitle: 'title',
+    },
+
+    hooks: {
+        afterChange: [revalidatePost],
+        afterRead: [populateAuthors],
+    },
+
 }

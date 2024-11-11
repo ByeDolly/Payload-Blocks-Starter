@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -30,6 +32,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <LivePreviewListener />
                 <Header />
                 {children}
+                <Footer />
             </body>
         </html>
     );
