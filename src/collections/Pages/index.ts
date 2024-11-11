@@ -100,7 +100,7 @@ export const Pages: CollectionConfig = {
                     prefix: ''
                 })
 
-                return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
+                return `${process.env.NEXT_PUBLIC_URL}${path}`
             },
         },
         preview: (data) => {
@@ -109,7 +109,7 @@ export const Pages: CollectionConfig = {
                 collection: 'pages',
             })
 
-            return `${process.env.PAYLOAD_PUBLIC_URL}${path}`
+            return `${process.env.NEXT_PUBLIC_URL}${path}`
         },
     },
 
