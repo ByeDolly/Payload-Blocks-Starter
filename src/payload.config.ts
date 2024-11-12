@@ -1,14 +1,12 @@
 import { buildConfig } from "payload";
+// DATABASE_IMPORT
 import sharp from "sharp";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { seoPlugin } from "@payloadcms/plugin-seo";
-
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
 import { Media } from "./collections/Media";
 import Users from "./collections/Users";
-
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
 
 export default buildConfig({
   collections: [Pages, Posts, Media, Users],
@@ -25,10 +23,10 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || "",
-  }),
-
+  db: {
+    // DATABASE_CONFIG
+  },
+  
   sharp,
 
   admin: {
