@@ -3,6 +3,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { seoPlugin } from "@payloadcms/plugin-seo";
+
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
 import { Media } from "./collections/Media";
@@ -23,10 +24,8 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
-  db: {
-    // DATABASE_CONFIG
-  },
-  
+  db: // DATABASE_CONFIG,
+
   sharp,
 
   admin: {
@@ -58,4 +57,4 @@ export default buildConfig({
   globals: [],
 
   secret: process.env.PAYLOAD_SECRET || "",
-});
+}); 
