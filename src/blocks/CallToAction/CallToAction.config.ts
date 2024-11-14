@@ -5,6 +5,7 @@ import { blockSpacingFields } from "@/fields/blockSpacingFields";
 export const CallToAction: Block = {
   slug: 'CallToAction',
   interfaceName: 'CallToActionBlock',
+  dbName: "cta",
   fields: [
     {
       type: "tabs",
