@@ -1,5 +1,5 @@
 import { buildConfig } from "payload";
-// DATABASE_IMPORT
+import { postgresAdapter } from '@payloadcms/db-postgres';
 import sharp from "sharp";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { seoPlugin } from "@payloadcms/plugin-seo";
@@ -24,7 +24,11 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
-  db: // DATABASE_CONFIG,
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL,
+    },
+  }),
 
   sharp,
 
